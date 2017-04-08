@@ -11,7 +11,7 @@ import os
 import random
 
 
-def add_line_to_file(line,output_file_name):
+def add_line_to_file(row,output_file_name):
 
 	init_str = ""
 	for item in row:
@@ -65,6 +65,27 @@ def return_file_as_array(input_file, column_header_in_file):
 			return_array.append(row)
 
 	return return_array
+
+
+# Format: [[data],[data],...]
+#
+def return_file_as_dict(input_file, column_header_in_file):
+
+	first_line = column_header_in_file
+	return_dict = {}
+
+	f = open(input_file)
+	csv_f = csv.reader(f)
+
+	for row in csv_f:
+		if (first_line):
+			first_line = 0
+			
+		else:
+			init_str = str(row[0]) + "," + str(row[1])
+			return_dict[init_str] = row[2]
+
+	return return_dict
 
 
 # Specific to 2014, can be made more extensible if needed
@@ -153,21 +174,76 @@ def estimate_dates_from_day_of_week_uniform(input_file, row_to_insert, output_fi
 
 # Takes a file that can have a header, user must specify a 
 # If a day is listed, a 1 will be added, otherwise a 0 will be added
+# Will insert new data into the last row
 #
-def add_data_binary(input_file, supplementary_file, column_header_in_supplementary, output_file):
+def add_data_binary(input_file, supplementary_file, column_header_in_supplementary, new_heading, output_file):
 
+	counter = 0
+	first_line = 1
+	row_to_insert = 0
 	true_array = return_file_as_array(supplementary_file,column_header_in_supplementary)
 	month_day_array = get_month_and_day_indeces(input_file)
-	month = month_day_array[0]
-	day = month_day_array[1]
+	month_index = month_day_array[0]
+	day_index = month_day_array[1]
 
-	
+	f = open(input_file)
+	csv_f = csv.reader(f)
+
+	for row in csv_f:
+		if (counter%10000 == 0):
+			print("Line: ", counter)
+		if (first_line):
+			row_to_insert = len(row)
+			first_line = 0
+			row.insert(row_to_insert,new_heading)
+		else:
+			row.insert(row_to_insert,str([row[month_index],row[day_index]] in true_array))
+
+		add_line_to_file(row,output_file)
+		counter += 1
 
 	return
 
 
-add_data_binary("../data_raw/_DeathRecords_ver3.csv", "../data_raw/FederalHoliday.csv", 1, "../data_raw/_temp.csv")
+# Supplementary file must be formatted like: month, day, data
+#
+def add_daily_data(input_file, supplementary_file, column_header_in_supplementary, not_found_str, new_heading, output_file):
 
+	counter = 0
+	first_line = 1
+	row_to_insert = 0
+	supplementary_dict = return_file_as_dict(supplementary_file,column_header_in_supplementary)
+	month_day_array = get_month_and_day_indeces(input_file)
+	month_index = month_day_array[0]
+	day_index = month_day_array[1]
+
+	f = open(input_file)
+	csv_f = csv.reader(f)
+
+	for row in csv_f:
+		if (counter%100000 == 0):
+			print("Line: ", counter)
+		if (first_line):
+			row_to_insert = len(row)
+			first_line = 0
+			row.insert(row_to_insert,new_heading)
+		else:
+			init_str = str(row[0]) + "," + str(row[1])
+			if (init_str in supplementary_dict):
+				row.insert(row_to_insert, supplementary_dict[init_str])
+			else:
+				row.insert(row_to_insert, not_found_str)
+
+		add_line_to_file(row, output_file)
+		counter += 1
+
+	return
+
+
+add_daily_data("../data_raw/_DeathRecords_ver4.csv", "../data_raw/S_and_P_500.csv", 1, "0%", "S&P 500 Percent Change","../data_raw/_temp.csv")
+
+# Used to add in federal holiday data
+#add_data_binary("../data_raw/_DeathRecords_ver3.csv", "../data_raw/FederalHoliday.csv", 1, "IsFederalHoliday","../data_raw/_temp.csv")
 
 # Used to estimate the mm/dd from the month and day of week
 #estimate_dates_from_day_of_week_uniform("../data_raw/_DeathRecords_ver2.csv", 6, "../data_raw/temp.csv")
