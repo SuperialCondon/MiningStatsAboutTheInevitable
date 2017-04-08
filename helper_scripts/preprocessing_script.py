@@ -53,7 +53,7 @@ def return_file_as_array(input_file, column_header_in_file):
 
 	for row in csv_f:
 		if (first_line):
-			pass
+			first_line = 0
 			
 		else:
 			return_array.append(row)
@@ -155,7 +155,7 @@ def estimate_dates_from_day_of_week_uniform(input_file, row_to_insert, output_fi
 
 	return
 
-# Takes a file with no header: month, day
+# Takes a file that can have a header, user must specify a 
 # If a day is listed, a 1 will be added, otherwise a 0 will be added
 #
 def add_data_binary(input_file, supplementary_file, column_header_in_supplementary, output_file):
@@ -168,7 +168,8 @@ def add_data_binary(input_file, supplementary_file, column_header_in_supplementa
 	return
 
 
-print(get_month_and_day_indeces("../data_raw/_DeathRecords_ver3.csv"))
+add_data_binary("../data_raw/_DeathRecords_ver3.csv", "../data_raw/FederalHoliday.csv", 1)
+
 
 # Used to estimate the mm/dd from the month and day of week
 #estimate_dates_from_day_of_week_uniform("../data_raw/_DeathRecords_ver2.csv", 6, "../data_raw/temp.csv")
