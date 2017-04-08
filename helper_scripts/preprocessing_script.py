@@ -12,8 +12,14 @@ import random
 
 
 def add_line_to_file(line,output_file_name):
+
+	init_str = ""
+	for item in row:
+		init_str = init_str + item + ","
+	init_str = init_str[:-1] + "\n"
+
 	with open(output_file_name, "a") as f:
-		f.write(line)
+		f.write(init_str)
 	return
 
 
@@ -48,7 +54,7 @@ def return_file_as_array(input_file, column_header_in_file):
 	first_line = column_header_in_file
 	return_array = []
 
-	f = open(file_name)
+	f = open(input_file)
 	csv_f = csv.reader(f)
 
 	for row in csv_f:
@@ -112,13 +118,7 @@ def remove_column(file_name, column_list, new_file_name):
 		for index in del_column_numbers:
 			del row[index]
 
-		init_str = ""
-
-		for item in row:
-			init_str = init_str + item + ","
-		init_str = init_str[:-1] + "\n"
-
-		add_line_to_file(init_str, new_file_name)
+		add_line_to_file(row, new_file_name)
 
 	return
 
@@ -137,7 +137,6 @@ def estimate_dates_from_day_of_week_uniform(input_file, row_to_insert, output_fi
 		if (counter%1000 == 0):
 			print("Line: ", counter)
 
-		init_str = ""
 		if (first_line):
 			first_line = 0
 			row.insert(row_to_insert,"Day")
@@ -147,10 +146,7 @@ def estimate_dates_from_day_of_week_uniform(input_file, row_to_insert, output_fi
 			estimated_day = random.choice(possible_days)
 			row.insert(row_to_insert,str(estimated_day))
 
-		for item in row:
-			init_str = init_str + item + ","
-		init_str = init_str[:-1] + "\n"
-		add_line_to_file(init_str, output_file)
+		add_line_to_file(row, output_file)
 		counter += 1
 
 	return
@@ -160,15 +156,17 @@ def estimate_dates_from_day_of_week_uniform(input_file, row_to_insert, output_fi
 #
 def add_data_binary(input_file, supplementary_file, column_header_in_supplementary, output_file):
 
-	true_array = return_file_as_array(input_file,column_header_in_supplementary)
+	true_array = return_file_as_array(supplementary_file,column_header_in_supplementary)
 	month_day_array = get_month_and_day_indeces(input_file)
 	month = month_day_array[0]
 	day = month_day_array[1]
 
+	
+
 	return
 
 
-add_data_binary("../data_raw/_DeathRecords_ver3.csv", "../data_raw/FederalHoliday.csv", 1)
+add_data_binary("../data_raw/_DeathRecords_ver3.csv", "../data_raw/FederalHoliday.csv", 1, "../data_raw/_temp.csv")
 
 
 # Used to estimate the mm/dd from the month and day of week
