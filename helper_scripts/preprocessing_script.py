@@ -17,6 +17,30 @@ def add_line_to_file(line,output_file_name):
 	return
 
 
+# Month must be called: MonthOfDeath
+# Day must be called: DayOfDeath
+#
+# Function will still return None if either of these columns are not found
+# Returns [int_month, int_day] normally
+#
+def get_month_and_day_indeces(input_file):
+
+	return_array = [0,0]
+
+	f = open(input_file)
+	csv_f = csv.reader(f)
+
+	for row in csv_f:
+		for i in range(0, len(row)):
+			if (row[i] == "MonthOfDeath"):
+				return_array[0] = i
+			elif (row[i] == "DayOfDeath"):
+				return_array[1] = i 
+		if (return_array[0] == 0 or return_array[1] == 0):
+			return None
+		return return_array
+
+
 # Format: [[data],[data],...]
 #
 def return_file_as_array(input_file, column_header_in_file):
@@ -134,10 +158,17 @@ def estimate_dates_from_day_of_week_uniform(input_file, row_to_insert, output_fi
 # Takes a file with no header: month, day
 # If a day is listed, a 1 will be added, otherwise a 0 will be added
 #
-def add_data_binary(input_file, supplementary_file, output_file):
+def add_data_binary(input_file, supplementary_file, column_header_in_supplementary, output_file):
+
+	true_array = return_file_as_array(input_file,column_header_in_supplementary)
+	month_day_array = get_month_and_day_indeces(input_file)
+	month = month_day_array[0]
+	day = month_day_array[1]
 
 	return
 
+
+print(get_month_and_day_indeces("../data_raw/_DeathRecords_ver3.csv"))
 
 # Used to estimate the mm/dd from the month and day of week
 #estimate_dates_from_day_of_week_uniform("../data_raw/_DeathRecords_ver2.csv", 6, "../data_raw/temp.csv")
