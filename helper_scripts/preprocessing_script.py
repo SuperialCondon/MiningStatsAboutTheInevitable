@@ -17,6 +17,26 @@ def add_line_to_file(line,output_file_name):
 	return
 
 
+# Format: [[data],[data],...]
+#
+def return_file_as_array(input_file, column_header_in_file):
+
+	first_line = column_header_in_file
+	return_array = []
+
+	f = open(file_name)
+	csv_f = csv.reader(f)
+
+	for row in csv_f:
+		if (first_line):
+			pass
+			
+		else:
+			return_array.append(row)
+
+	return return_array
+
+
 # Specific to 2014, can be made more extensible if needed
 #
 # Takes day_of_week: Int (Monday = 1, Tuesday = 2, ...)
@@ -79,11 +99,11 @@ def remove_column(file_name, column_list, new_file_name):
 	return
 
 
-def estimate_dates_from_day_of_week_uniform(input_file, row_to_insert, output_file_name):
+def estimate_dates_from_day_of_week_uniform(input_file, row_to_insert, output_file):
 
 	counter = 0
-	if(os.path.isfile(output_file_name)):
-		os.remove(output_file_name)
+	if(os.path.isfile(output_file)):
+		os.remove(output_file)
 	first_line = 1
 
 	f = open(input_file)
@@ -106,13 +126,21 @@ def estimate_dates_from_day_of_week_uniform(input_file, row_to_insert, output_fi
 		for item in row:
 			init_str = init_str + item + ","
 		init_str = init_str[:-1] + "\n"
-		add_line_to_file(init_str, output_file_name)
+		add_line_to_file(init_str, output_file)
 		counter += 1
 
 	return
 
+# Takes a file with no header: month, day
+# If a day is listed, a 1 will be added, otherwise a 0 will be added
+#
+def add_data_binary(input_file, supplementary_file, output_file):
 
-estimate_dates_from_day_of_week_uniform("../data_raw/_DeathRecords_ver2.csv", 6, "../data_raw/temp.csv")
+	return
+
+
+# Used to estimate the mm/dd from the month and day of week
+#estimate_dates_from_day_of_week_uniform("../data_raw/_DeathRecords_ver2.csv", 6, "../data_raw/temp.csv")
 
 # Used to remove redundant columns of data, can be used again if more found redundant
 #remove_list = ['CurrentDataYear', 'RaceRecode3']
