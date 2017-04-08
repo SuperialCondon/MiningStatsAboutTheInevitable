@@ -8,6 +8,7 @@
 
 import csv
 import os
+import random
 
 
 def add_line_to_file(line,output_file_name):
@@ -20,7 +21,7 @@ def add_line_to_file(line,output_file_name):
 #
 # Takes day_of_week: Int (Monday = 1, Tuesday = 2, ...)
 #
-def get_list_of_possible_dates(day_of_week, month):
+def get_list_of_possible_days(day_of_week, month):
 	
 	# Day of week on 1st, Number of days
 	# Monday = 1
@@ -78,12 +79,40 @@ def remove_column(file_name, column_list, new_file_name):
 	return
 
 
-def estimate_dates_from_day_of_week_uniform(input_file, output_file_name):
+def estimate_dates_from_day_of_week_uniform(input_file, row_to_insert, output_file_name):
+
+	counter = 0
+	if(os.path.isfile(output_file_name)):
+		os.remove(output_file_name)
+	first_line = 1
+
+	f = open(input_file)
+	csv_f = csv.reader(f)
+
+	for row in csv_f:
+		if (counter%1000 == 0):
+			print("Line: ", counter)
+
+		init_str = ""
+		if (first_line):
+			first_line = 0
+			row.insert(row_to_insert,"Day")
+			
+		else:
+			possible_days = get_list_of_possible_days(int(row[16]),int(row[5]))
+			estimated_day = random.choice(possible_days)
+			row.insert(row_to_insert,str(estimated_day))
+
+		for item in row:
+			init_str = init_str + item + ","
+		init_str = init_str[:-1] + "\n"
+		add_line_to_file(init_str, output_file_name)
+		counter += 1
 
 	return
 
 
-
+estimate_dates_from_day_of_week_uniform("../data_raw/_DeathRecords_ver2.csv", 6, "../data_raw/temp.csv")
 
 # Used to remove redundant columns of data, can be used again if more found redundant
 #remove_list = ['CurrentDataYear', 'RaceRecode3']
