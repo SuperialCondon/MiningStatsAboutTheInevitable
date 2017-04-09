@@ -228,7 +228,7 @@ def add_daily_data(input_file, supplementary_file, column_header_in_supplementar
 			first_line = 0
 			row.insert(row_to_insert,new_heading)
 		else:
-			init_str = str(row[0]) + "," + str(row[1])
+			init_str = str(row[month_index]) + "," + str(row[day_index])
 			if (init_str in supplementary_dict):
 				row.insert(row_to_insert, supplementary_dict[init_str])
 			else:
