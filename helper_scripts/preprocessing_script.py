@@ -11,11 +11,14 @@ import os
 import random
 
 
+MAX_FILE_SIZE_LIMIT_WITH_ROOM = 50000000
+
+
 def add_line_to_file(row,output_file_name):
 
 	init_str = ""
 	for item in row:
-		init_str = init_str + item + ","
+		init_str = init_str + item.strip('\t') + ","
 	init_str = init_str[:-1] + "\n"
 
 	with open(output_file_name, "a") as f:
@@ -190,7 +193,7 @@ def add_data_binary(input_file, supplementary_file, column_header_in_supplementa
 	csv_f = csv.reader(f)
 
 	for row in csv_f:
-		if (counter%10000 == 0):
+		if (counter%100000 == 0):
 			print("Line: ", counter)
 		if (first_line):
 			row_to_insert = len(row)
@@ -240,10 +243,46 @@ def add_daily_data(input_file, supplementary_file, column_header_in_supplementar
 	return
 
 
-add_daily_data("../data_raw/_DeathRecords_ver4.csv", "../data_raw/S_and_P_500.csv", 1, "0%", "S&P 500 Percent Change","../data_raw/_temp.csv")
+# Takes output_dir --> ../some_dir/
+#
+def break_large_file(input_file, output_dir):
+
+	file_num = 0
+	first_line = 1
+	header_str = []
+	file_name_base = output_dir + "DeathRecords_pt"
+	current_output_file = file_name_base + str(file_num) + ".csv"
+
+	os.mknod(current_output_file)
+	f = open(input_file)
+	csv_f = csv.reader(f)
+	print(current_output_file)
+	for line in csv_f:
+		statinfo = os.stat(current_output_file)
+		if (first_line):
+			header_str = line
+			first_line = 0
+		elif (statinfo.st_size > MAX_FILE_SIZE_LIMIT_WITH_ROOM):
+				file_num += 1
+				current_output_file = file_name_base + str(file_num) + ".csv"
+				statinfo = os.stat(input_file)
+				add_line_to_file(header_str, current_output_file)
+				print(current_output_file)
+		add_line_to_file(line, current_output_file)
+
+	return
+
+
+break_large_file("../data_raw/_DeathRecords_ver9.csv", "../partitioned_files/")
+
+#arr = return_file_as_array("../data_raw/SunSpotData.csv", 1)
+#for line in arr:
+#	add_line_to_file(line, "../data_raw/temp.csv")
+
+#add_data_binary("../data_raw/_DeathRecords_ver8.csv", "../data_raw/MassShootings.csv", 1, "MassShootingOccurred","../data_raw/_DeathRecords_ver9.csv")
 
 # Used to add in federal holiday data
-#add_data_binary("../data_raw/_DeathRecords_ver3.csv", "../data_raw/FederalHoliday.csv", 1, "IsFederalHoliday","../data_raw/_temp.csv")
+#add_data_binary("../data_raw/_DeathRecords_ver6.csv", "../data_raw/FullMoon.csv", 1, "IsFullMoon","../data_raw/_temp.csv")
 
 # Used to estimate the mm/dd from the month and day of week
 #estimate_dates_from_day_of_week_uniform("../data_raw/_DeathRecords_ver2.csv", 6, "../data_raw/temp.csv")
