@@ -11,7 +11,7 @@ import os
 import random
 
 
-MAX_FILE_SIZE_LIMIT_WITH_ROOM = 50000000
+MAX_FILE_SIZE_LIMIT_WITH_ROOM = 500000
 
 
 def add_line_to_file(row,output_file_name):
@@ -273,7 +273,7 @@ def break_large_file(input_file, output_dir):
 	return
 
 
-break_large_file("../data_raw/_DeathRecords_ver9.csv", "../partitioned_files/")
+break_large_file("../data_raw/_DeathRecords_ver9.csv", "../small_partial_dataset/")
 
 #arr = return_file_as_array("../data_raw/SunSpotData.csv", 1)
 #for line in arr:
