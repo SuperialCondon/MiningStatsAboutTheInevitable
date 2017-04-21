@@ -1,0 +1,59 @@
+Index cheat sheet:
+
+0: 	Id
+1: 	ResidentStatus
+2: 	Education1989Revision
+3: 	Education2003Revision
+4: 	EducationReportingFlag
+5: 	MonthOfDeath,DayOfDeath
+6: 	Sex
+7: 	AgeType
+8: 	Age
+9: 	AgeSubstitutionFlag
+10: AgeRecode52
+11: AgeRecode27
+12: AgeRecode12
+13: InfantAgeRecode22
+14: PlaceOfDeathAndDecedentsStatus
+15: MaritalStatus
+16: DayOfWeekOfDeath
+17: InjuryAtWork
+18: MannerOfDeath
+19: MethodOfDisposition
+20: Autopsy
+21: ActivityCode
+22: PlaceOfInjury
+23: Icd10Code
+24: CauseRecode358
+25: CauseRecode113
+26: InfantCauseRecode130
+27: CauseRecode39
+28: NumberOfEntityAxisConditions
+29: NumberOfRecordAxisConditions
+30: Race
+31: BridgedRaceFlag
+32: RaceImputationFlag
+33: RaceRecode3
+34: HispanicOrigin
+35: HispanicOriginRaceRecode
+36: IsFederalHoliday
+37: S&P 500 Percent Change
+38: IsFridayThe13th
+39: IsFullMoon
+40: Sun Spot Number
+41: MassShootingOccurred
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
