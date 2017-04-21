@@ -70,22 +70,48 @@ def bayes_main(directory_path, data_list):
 	complete_list = read_in_files_in_directory(directory_path, data_list)
 	total = 0
 	C_possibility_list = data_list[0][2]
+	record_dict = {}
+
+	# Establish dictionary to record 
+	# loop through entire data list
+	for i in range(1, len(data_list)):
+		# loop through the outcome list
+		for result in data_list[i][2]:
+			# investigated outcome list
+			for item in C_possibility_list:
+				record_dict[data_list[i][0]+result+data_list[0][0]+item[0]] = 0
 
 	for item in complete_list:
 		for possibility in C_possibility_list:
 			if (item[C_index] == possibility[0]):
-
 				possibility[1] += 1
+		for i in range(1, len(item)):
+			temp_str = data_list[i][0]+item[i]+data_list[0][0]+item[0]
+
+			if temp_str in record_dict:
+				record_dict[temp_str] += 1
 
 		total += 1
+
+	final_return = []
+	for total_item in C_possibility_list:
+		this_item = total_item[0]
+		check_for = data_list[0][0] + this_item
+		mult = 1
+		for item in record_dict:
+			if check_for in item:
+				mult *= (record_dict[item]/total_item[1])
+		mult *= (total_item[1]/total)
+		final_return.append("P("+data_list[0][0]+"="+total_item[0]+"|X) = "+str(mult))
+	print(final_return)
 
 
 # Data list in format -> [ [header_name, raw_index, [possibility_list] ], ...]
 data_list = [ ["buys_computer", 5, [["yes",0], ["no",0]]], 
-				["age", 1, ["yes", "no"]], 
-				["income", 2, ["yes","no"]], 
-				["student", 3, ["yes","no"]], 
-				["credit_rating", 4, ["yes","no"]] ]
+				["age", 1, ["<=30"]], 
+				["income", 2, ["medium"]], 
+				["student", 3, ["yes"]], 
+				["credit_rating", 4, ["fair"]] ]
 
 bayes_main("../from_slides/", data_list)
 
