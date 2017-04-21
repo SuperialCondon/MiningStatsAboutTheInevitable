@@ -114,13 +114,3 @@ data_list = [ ["buys_computer", 5, [["yes",0], ["no",0]]],
 				["credit_rating", 4, ["fair"]] ]
 
 bayes_main("../from_slides/", data_list)
-
-
-# H_list -> [(H_1, H_2, ...)] -> what we are looking for given A
-# A_list -> [(X_1, X_2, ...)] -> the known conditional 
-#def find_prob_H_given_X(H_list, X_list):
-
-
-
-# ignore values in format = [(Column_Header, Data_value_str),(...]
-#ignore_values = [()]
