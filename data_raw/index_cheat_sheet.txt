@@ -1,59 +1,267 @@
 Index cheat sheet:
 
 0: 	Id
+		Options: unique ID
+
 1: 	ResidentStatus
+		Options: 
+			1,"RESIDENTS"
+			2,"INTRASTATE NONRESIDENTS"
+			3,"INTERSTATE NONRESIDENTS"
+			4,"FOREIGN RESIDENTS"
+
 2: 	Education1989Revision
+		Options:
+			0,"No formal education"
+			1,"Years of elementary school"
+			2,"Years of elementary school"
+			3,"Years of elementary school"
+			4,"Years of elementary school"
+			5,"Years of elementary school"
+			6,"Years of elementary school"
+			7,"Years of elementary school"
+			8,"Years of elementary school"
+			9,"1 year of high school"
+			10,"2 years of high school"
+			11,"3 years of high school"
+			12,"4 years of high school"
+			13,"1 year of college"
+			14,"2 years of college"
+			15,"3 years of college"
+			16,"4 years of college"
+			17,"5 or more years of college"
+			99,"Not stated"
+
 3: 	Education2003Revision
+		Options: 
+			1,"8th grade or less"
+			2,"9 - 12th grade, no diploma"
+			3,"high school graduate or GED completed"
+			4,"some college credit, but no degree"
+			5,"Associate degree"
+			6,"Bachelor's degree"
+			7,"Master's degree"
+			8,"Doctorate or professional degree"
+			9,Unknown
+
 4: 	EducationReportingFlag
-5: 	MonthOfDeath,DayOfDeath
-6: 	Sex
-7: 	AgeType
-8: 	Age
-9: 	AgeSubstitutionFlag
-10: AgeRecode52
-11: AgeRecode27
-12: AgeRecode12
-13: InfantAgeRecode22
-14: PlaceOfDeathAndDecedentsStatus
-15: MaritalStatus
-16: DayOfWeekOfDeath
-17: InjuryAtWork
-18: MannerOfDeath
-19: MethodOfDisposition
-20: Autopsy
-21: ActivityCode
-22: PlaceOfInjury
-23: Icd10Code
-24: CauseRecode358
-25: CauseRecode113
-26: InfantCauseRecode130
-27: CauseRecode39
-28: NumberOfEntityAxisConditions
-29: NumberOfRecordAxisConditions
-30: Race
-31: BridgedRaceFlag
-32: RaceImputationFlag
-33: RaceRecode3
-34: HispanicOrigin
-35: HispanicOriginRaceRecode
-36: IsFederalHoliday
-37: S&P 500 Percent Change
-38: IsFridayThe13th
-39: IsFullMoon
-40: Sun Spot Number
-41: MassShootingOccurred
+		Options:
+			0,"1989 revision of education item on certificate"
+			1,"2003 revision of education item on certificate"
+			2,"no education item on certificate"
 
+5: 	MonthOfDeath
+		Options: traditional month numbering
 
+6:	DayOfDeath
+		Options: traditional day numbering
 
+7: 	Sex
+		Options:
+			M,"male"
+			F,"female"
 
+8: 	AgeType
+		Options:
+			1,Years
+			2,Months
+			4,Days
+			5,Hours
+			6,Minutes
+			9,"Age not stated"
 
+9: 	Age
+		Options: traditional age numbering
 
+10: AgeSubstitutionFlag
+		Options: unsure
 
+11: AgeRecode52
+		Options: reference AgeRecode52.csv
 
+12: AgeRecode27
+		Options: reference AgeRecode27.csv
 
+13: AgeRecode12
+		Options:
+			1,"Under 1 year (includes not stated infant ages)"
+			2,"1 - 4 years"
+			3,"5 - 14 years"
+			4,"15 - 24 years"
+			5,"25 - 34 years"
+			6,"35 - 44 years"
+			7,"45 - 54 years"
+			8,"55 - 64 years"
+			9,"65 - 74 years"
+			10,"75 - 84 years"
+			11,"85 years and over"
+			12,"Age not stated"
 
+14: InfantAgeRecode22
+		Options: reference InfantAgeRecode22.csv
 
+15: PlaceOfDeathAndDecedentsStatus
+		Options:
+			1,"Hospital, clinic or Medical Center - Inpatient"
+			2,"Hospital, Clinic or Medical Center - Outpatient or admitted to Emergency Room"
+			3,"Hospital, Clinic or Medical Center - Dead on Arrival"
+			4,"Decedent's home"
+			5,"Hospice facility"
+			6,"Nursing home/long term care"
+			7,Other
+			9,"Place of death unknown"
 
+16: MaritalStatus
+		Options:
+			S,"Never married, single"
+			M,Married
+			W,Widowed
+			D,Divorced
+			U,"Marital Status unknown"
 
+17: DayOfWeekOfDeath
+		Options:
+			1,Sunday
+			2,Monday
+			3,Tuesday
+			4,Wednesday
+			5,Thursday
+			6,Friday
+			7,Saturday
+			9,Unknown
 
+18: InjuryAtWork
+		Options: unknown
 
+19: MannerOfDeath
+		Options:
+			1,Accident
+			2,Suicide
+			3,Homicide
+			4,"Pending investigation"
+			5,"Could not determine"
+			6,Self-Inflicted
+			7,Natural
+			0,"Not specified"
+
+20: MethodOfDisposition
+		Options:
+			B,Burial
+			C,Cremation
+			O,Other
+			U,Unknown
+
+21: Autopsy
+		Options:
+			N,No
+			Y,Yes
+
+22: ActivityCode
+		Options: unknown
+
+23: PlaceOfInjury
+		Options:
+			0,Home
+			1,"Residential institution"
+			2,"School, other institution and public administrative area"
+			3,"Sports and athletics area"
+			4,"Street and highway"
+			5,"Trade and service area"
+			6,"Industrial and construction area"
+			7,Farm
+			8,"Other Specified Places"
+			9,"Unspecified place"
+			99,"Causes other than W00-Y34, except Y06.- and Y07"
+
+24: Icd10Code
+		Options: see Icd10Code.csv
+
+25: CauseRecode358
+		Options: unknown
+
+26: CauseRecode113
+		Options: unknown
+
+27: InfantCauseRecode130
+		Options: see InfantAgeRecode22.csv
+
+28: CauseRecode39
+		Options: unknown
+
+29: NumberOfEntityAxisConditions
+		Options: unknown
+
+30: NumberOfRecordAxisConditions
+		Options: unknown
+
+31: Race
+		Options:
+			0,"Other races"
+			1,White
+			2,Black
+			3,"American Indian (includes Aleuts and Eskimos)"
+			4,Chinese
+			5,Japanese
+			6,"Hawaiian (includes Part-Hawaiian)"
+			7,Filipino
+			8,"Other Asian or Pacific Islander"
+			18,"Asian Indian"
+			28,Korean
+			38,Samoan
+			48,Vietnamese
+			58,Guamanian
+			68,"Other Asian or Pacific Islander in areas reporting codes 18-58"
+			78,"Combined other Asian or Pacific Islander, includes codes 18-68 for areas that do not report them separately"
+
+32: BridgedRaceFlag
+		Options: unknown
+
+33: RaceImputationFlag
+		Options: unknown
+
+34: RaceRecode3
+		Options:
+			1,White
+			2,"Races other than White or Black"
+			3,Black
+
+35: HispanicOrigin
+		Options: see HispanicOrigin.csv
+
+36: HispanicOriginRaceRecode
+		Options:
+			1,Mexican
+			2,"Puerto Rican"
+			3,Cuban
+			4,"Central or South American"
+			5,"Other or unknown Hispanic"
+			6,"Non-Hispanic white"
+			7,"Non-Hispanic black"
+			8,"Non-Hispanic other races"
+			9,"Hispanic origin unknown"
+
+37: IsFederalHoliday
+		Options:
+			True
+			False
+
+38: S&P 500 Percent Change
+		Options: traditional percent notation
+
+39: IsFridayThe13th
+		Options:
+			True
+			False
+
+40: IsFullMoon
+		Options:
+			True
+			False
+
+41: Sun Spot Number
+		Options: Incremental number, see the sun spot data for more info
+
+42: MassShootingOccurred
+		Options:
+			True
+			False
