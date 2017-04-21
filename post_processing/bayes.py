@@ -11,7 +11,7 @@ import os
 import random
 
 # Redundant function, refactor to remove
-def get_c_index(directory_path, c):
+def get_c_index(directory_path, c,):
 	for filename in os.listdir(directory_path):
 		f = open(directory_path+filename)
 		csv_f = csv.reader(f)
@@ -24,7 +24,6 @@ def get_c_index(directory_path, c):
 
 def get_indice_list(directory_path, needed_rows):
 	indice_list = []
-	print(needed_rows)
 	for filename in os.listdir(directory_path):
 		f = open(directory_path+filename)
 		csv_f = csv.reader(f)
@@ -33,14 +32,15 @@ def get_indice_list(directory_path, needed_rows):
 			for i in range(0, len(row)):
 				if (row[i].strip() in needed_rows):
 					indice_list.append(i)
-					print(i)
-
 			return indice_list
 
 
-def read_in_files_in_directory(directory_path, needed_rows):
+def read_in_files_in_directory(directory_path, data_list):
 	complete_list = []
-	indice_list = get_indice_list(directory_path, needed_rows)
+	indice_list = []
+
+	for item in data_list:
+		indice_list.append(item[1])
 
 	for filename in os.listdir(directory_path):
 		f = open(directory_path+filename)
@@ -65,18 +65,29 @@ def read_in_files_in_directory(directory_path, needed_rows):
 
 
 # C is the single value that we care about, X will be rest of list
-def bayes_main(directory_path, needed_rows, C, C_possibility_list):
-	C_index = get_c_index(directory_path, C)
-	complete_list = read_in_files_in_directory(directory_path, needed_rows)
+def bayes_main(directory_path, data_list):
+	C_index = 0
+	complete_list = read_in_files_in_directory(directory_path, data_list)
+	total = 0
+	C_possibility_list = data_list[0][2]
+
+	for item in complete_list:
+		for possibility in C_possibility_list:
+			if (item[C_index] == possibility[0]):
+
+				possibility[1] += 1
+
+		total += 1
 
 
+# Data list in format -> [ [header_name, raw_index, [possibility_list] ], ...]
+data_list = [ ["buys_computer", 5, [["yes",0], ["no",0]]], 
+				["age", 1, ["yes", "no"]], 
+				["income", 2, ["yes","no"]], 
+				["student", 3, ["yes","no"]], 
+				["credit_rating", 4, ["yes","no"]] ]
 
-
-needed_rows = ["age", "income", "student", "credit_rating"]
-C = "buys_computer"
-C_possibility_list = ["yes", "no"]
-
-bayes_main("../from_slides/", needed_rows, C, C_possibility_list)
+bayes_main("../from_slides/", data_list)
 
 
 # H_list -> [(H_1, H_2, ...)] -> what we are looking for given A
