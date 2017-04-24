@@ -10,6 +10,14 @@ import csv
 import os
 import random
 
+
+def add_line_to_file(init_str,output_file_name):
+
+	with open(output_file_name, "a") as f:
+		f.write(init_str)
+	return
+
+
 # Redundant function, refactor to remove
 def get_c_index(directory_path, c,):
 	for filename in os.listdir(directory_path):
@@ -66,21 +74,28 @@ def read_in_files_in_directory(directory_path, data_list):
 
 
 # C is the single value that we care about, X will be rest of list
-def bayes_main(directory_path, data_list):
+def bayes_main(directory_path, data_list, output_file_name):
 	C_index = 0
 	complete_list = read_in_files_in_directory(directory_path, data_list)
 	total = 0
 	C_possibility_list = data_list[0][2]
 	record_dict = {}
+	X = ""
 
 	# Establish dictionary to record 
 	# loop through entire data list
 	for i in range(1, len(data_list)):
 		# loop through the outcome list
+		X += data_list[i][0]
+		X += " = "
 		for result in data_list[i][2]:
+			X += result
+			X += ", "
 			# investigated outcome list
 			for item in C_possibility_list:
 				record_dict[data_list[i][0]+result+data_list[0][0]+item[0]] = 0
+
+	X = X[:-2]
 
 	for item in complete_list:
 		for possibility in C_possibility_list:
@@ -94,8 +109,8 @@ def bayes_main(directory_path, data_list):
 
 		total += 1
 
-	final_return = []
 	for total_item in C_possibility_list:
+		line = ""
 		this_item = total_item[0]
 		check_for = data_list[0][0] + this_item
 		mult = 1
@@ -103,8 +118,8 @@ def bayes_main(directory_path, data_list):
 			if check_for in item:
 				mult *= (record_dict[item]/total_item[1])
 		mult *= (total_item[1]/total)
-		final_return.append("P("+data_list[0][0]+"="+total_item[0]+"|X) = "+str(mult))
-	print(final_return)
+		line = line+"Probability "+data_list[0][0]+" = "+total_item[0]+" given " + X +", "+str(mult)+", "+str(total) +"\n"
+		add_line_to_file(line,output_file_name)
 
 
 # Data list in format -> [ [header_name, raw_index, [possibility_list] ], ...]
@@ -117,6 +132,6 @@ def bayes_main(directory_path, data_list):
 #bayes_main("../from_slides/", data_list)
 
 data_list = [ ["IsFederalHoliday", 37, [["True",0], ["False",0]]],
-				["Sex", 7, ["M"]] ]
+				["Sex", 7, ["F"]] ]
 
-bayes_main("../small_partial_dataset/", data_list)
+bayes_main("../small_partial_dataset/", data_list, "../results/S&P_500_results.csv")
