@@ -11,7 +11,7 @@ import os
 import random
 
 
-MAX_FILE_SIZE_LIMIT_WITH_ROOM = 500000
+MAX_FILE_SIZE_LIMIT_WITH_ROOM = 5000000
 
 
 def add_line_to_file(row,output_file_name):
@@ -273,13 +273,15 @@ def break_large_file(input_file, output_dir):
 	return
 
 
-break_large_file("../data_raw/_DeathRecords_ver9.csv", "../small_partial_dataset/")
+break_large_file("../data_raw/_DeathRecords_ver11.csv", "../partitioned_files/")
 
 #arr = return_file_as_array("../data_raw/SunSpotData.csv", 1)
 #for line in arr:
 #	add_line_to_file(line, "../data_raw/temp.csv")
 
 #add_data_binary("../data_raw/_DeathRecords_ver8.csv", "../data_raw/MassShootings.csv", 1, "MassShootingOccurred","../data_raw/_DeathRecords_ver9.csv")
+
+#add_daily_data("../data_raw/_DeathRecords_ver10.csv", "../data_raw/S_and_P_500.csv", 1, "0%", "S&P 500 Percent Change", "../data_raw/_DeathRecords_ver11.csv")
 
 # Used to add in federal holiday data
 #add_data_binary("../data_raw/_DeathRecords_ver6.csv", "../data_raw/FullMoon.csv", 1, "IsFullMoon","../data_raw/_temp.csv")
@@ -288,5 +290,5 @@ break_large_file("../data_raw/_DeathRecords_ver9.csv", "../small_partial_dataset
 #estimate_dates_from_day_of_week_uniform("../data_raw/_DeathRecords_ver2.csv", 6, "../data_raw/temp.csv")
 
 # Used to remove redundant columns of data, can be used again if more found redundant
-#remove_list = ['CurrentDataYear', 'RaceRecode3']
-#remove_column("../data/DeathRecords.csv", remove_list, "../data/DeathRecords_ver2.csv")
+#remove_list = ['S&P 500 Percent Change']
+#remove_column("../data_raw/_DeathRecords_ver9.csv", remove_list, "../data_raw/_DeathRecords_ver10.csv")

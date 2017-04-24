@@ -1,0 +1,2 @@
+['P(IsFullMoon=True|MassShootingOccured=False) = 0.02291390253523147', 'P(IsFullMoon=False|MassShootingOccured=False) = 0.5574640513500914']
+['P(IsFullMoon=True|MassShootingOccured=True) = 0.007745544518951483', 'P(IsFullMoon=False|MassShootingOccured=True) = 0.4118765015957256']

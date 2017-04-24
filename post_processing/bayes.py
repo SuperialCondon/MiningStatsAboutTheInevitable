@@ -43,6 +43,7 @@ def read_in_files_in_directory(directory_path, data_list):
 		indice_list.append(item[1])
 
 	for filename in os.listdir(directory_path):
+		print("Reading in file "+filename)
 		f = open(directory_path+filename)
 		csv_f = csv.reader(f)
 		first_line = True
@@ -107,10 +108,15 @@ def bayes_main(directory_path, data_list):
 
 
 # Data list in format -> [ [header_name, raw_index, [possibility_list] ], ...]
-data_list = [ ["buys_computer", 5, [["yes",0], ["no",0]]], 
-				["age", 1, ["<=30"]], 
-				["income", 2, ["medium"]], 
-				["student", 3, ["yes"]], 
-				["credit_rating", 4, ["fair"]] ]
+#data_list = [ ["buys_computer", 5, [["yes",0], ["no",0]]], 
+#				["age", 1, ["<=30"]], 
+#				["income", 2, ["medium"]], 
+#				["student", 3, ["yes"]], 
+#				["credit_rating", 4, ["fair"]] ]
 
-bayes_main("../from_slides/", data_list)
+#bayes_main("../from_slides/", data_list)
+
+data_list = [ ["IsFederalHoliday", 37, [["True",0], ["False",0]]],
+				["Sex", 7, ["M"]] ]
+
+bayes_main("../small_partial_dataset/", data_list)
