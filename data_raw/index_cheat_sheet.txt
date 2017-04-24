@@ -245,23 +245,23 @@ Index cheat sheet:
 			True
 			False
 
-38: S&P 500 Percent Change
-		Options: traditional percent notation
-
-39: IsFridayThe13th
+38: IsFridayThe13th
 		Options:
 			True
 			False
 
-40: IsFullMoon
+39: IsFullMoon
 		Options:
 			True
 			False
 
-41: Sun Spot Number
+40: Sun Spot Number
 		Options: Incremental number, see the sun spot data for more info
 
-42: MassShootingOccurred
+41: MassShootingOccurred
 		Options:
 			True
 			False
+
+42: S&P 500 Percent Change
+		Options: traditional percent notation
