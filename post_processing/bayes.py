@@ -131,7 +131,26 @@ def bayes_main(directory_path, data_list, output_file_name):
 
 #bayes_main("../from_slides/", data_list)
 
-data_list = [ ["IsFederalHoliday", 37, [["True",0], ["False",0]]],
-				["Sex", 7, ["F"]] ]
+# data_list_full must be formatted like a list of the data_list objects.
+#   [                  First objects                  ], [Secondary Objects]
+# [ ["IsFederalHoliday", 37, [["True",0], ["False",0]]], ["Sex", 7, ["F"]] ]
 
-bayes_main("../small_partial_dataset/", data_list, "../results/S&P_500_results.csv")
+def looper(directory_path, data_list_full, output_file_name):
+	for sub_list in data_list_full:
+		bayes_main(directory_path, sub_list, output_file_name)
+
+
+
+
+
+
+
+
+data_list_full = [ [ ["IsFridayThe13th", 37, [["True",0], ["False",0]]], ["Sex", 7, ["F"]] ], 
+						[ ["IsFridayThe13th", 37, [["True",0], ["False",0]]], ["Sex", 7, ["M"]] ] ]
+
+
+directory_path = "../partitioned_files/"
+output_file_name = "../results/IsFridayThe13th_given_Sex.csv"
+
+looper(directory_path, data_list_full, output_file_name)
