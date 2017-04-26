@@ -1,0 +1,4 @@
+Probability IsFullMoon = True given Sex = F, 0.015919063493879504, 2648397
+Probability IsFullMoon = False given Sex = F, 0.47771463266270126, 2648397
+Probability IsFullMoon = True given Sex = M, 0.016434469605576506, 2648397
+Probability IsFullMoon = False given Sex = M, 0.4899295687164727, 2648397

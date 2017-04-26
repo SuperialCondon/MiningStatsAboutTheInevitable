@@ -145,12 +145,16 @@ def looper(directory_path, data_list_full, output_file_name):
 
 
 
+# Running IsFridayThe13th_given_Sex
+#data_list_full = [ [ ["IsFridayThe13th", 38, [["True",0], ["False",0]]], ["Sex", 7, ["F"]] ], 
+#						[ ["IsFridayThe13th", 38, [["True",0], ["False",0]]], ["Sex", 7, ["M"]] ] ]
 
-data_list_full = [ [ ["IsFridayThe13th", 37, [["True",0], ["False",0]]], ["Sex", 7, ["F"]] ], 
-						[ ["IsFridayThe13th", 37, [["True",0], ["False",0]]], ["Sex", 7, ["M"]] ] ]
+# Running IsFridayThe13th_given_Sex
+data_list_full = [ [ ["IsFullMoon", 39, [["True",0], ["False",0]]], ["Sex", 7, ["F"]] ], 
+						[ ["IsFullMoon", 39, [["True",0], ["False",0]]], ["Sex", 7, ["M"]] ] ]
 
 
 directory_path = "../partitioned_files/"
-output_file_name = "../results/IsFridayThe13th_given_Sex.csv"
+output_file_name = "../results/IsFullMoon_given_Sex.csv"
 
 looper(directory_path, data_list_full, output_file_name)
