@@ -23,4 +23,22 @@ def calculateCSV():
                     counter+= 1
     return counter
 
-print calculateCSV()
+def calculateTotalPercentage(arrayOfTotalDeaths):
+    updatedArray = []
+    for statistic in arrayOfTotalDeaths:
+        updatedArray.append((statistic / 6000)) #The 6000 would be changed to the total number of deaths from the dataset
+    return updatedArray
+
+def subMain():
+    alzheimers = calculateCSV()
+    parkinsons = calculateCSV()
+    septcemia = calculateCSV()
+    #print alzheimers #g309,g318
+    #print parkinsons #g20
+    #print septcemia #a40
+    arrayOfDeathsFromSet = [alzheimers,parkinsons,septcemia]
+    percentagesOfDeaths = calculateTotalPercentage(arrayOfDeathsFromSet) #This works but it wont print numbers less than 1, so anything from 0 to 0.99999999 it keeps rounding to 0
+    #blanking on how to fix, but once fixed we could calculate the percentage of total deaths to match the cdc pdf.
+    print percentagesOfDeaths
+
+subMain()
