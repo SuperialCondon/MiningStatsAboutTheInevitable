@@ -18,6 +18,18 @@ def add_line_to_file(init_str,output_file_name):
 	return
 
 
+def array_to_file(row,output_file_name):
+
+	init_str = ""
+	for item in row:
+		init_str = init_str + item.strip('\t') + ","
+	init_str = init_str[:-1] + "\n"
+
+	with open(output_file_name, "a") as f:
+		f.write(init_str)
+	return
+
+
 # Redundant function, refactor to remove
 def get_c_index(directory_path, c,):
 	for filename in os.listdir(directory_path):
@@ -122,6 +134,38 @@ def bayes_main(directory_path, data_list, output_file_name):
 		add_line_to_file(line,output_file_name)
 
 
+#
+# Usage: Split set based on some relevant attribute
+#
+
+def generate_partitioned_set(input_directory_path, output_directory_path, relevant_attr_index, relevant_attr_possibility_list, filename_base):
+	file_list = []
+	for i in range(0,len(relevant_attr_possibility_list)):
+		this_file = output_directory_path + "_"+filename_base+"_"+relevant_attr_possibility_list[i]+".csv"
+		file_list.append(this_file)
+	print(file_list)
+
+
+	for filename in os.listdir(input_directory_path):
+		print("Reading in file "+filename)
+		f = open(input_directory_path+filename)
+		csv_f = csv.reader(f)
+		first_line = True
+
+		for row in csv_f:
+			if(first_line):
+				for file in file_list:
+					#array_to_file(row,file)
+					a=0
+				first_line = False
+			else:
+				for i in range(0, len(relevant_attr_possibility_list)):
+					if(row[relevant_attr_index] == relevant_attr_possibility_list[i]):
+						array_to_file(row,file_list[i])
+				
+	return
+
+
 # Data list in format -> [ [header_name, raw_index, [possibility_list] ], ...]
 #data_list = [ ["buys_computer", 5, [["yes",0], ["no",0]]], 
 #				["age", 1, ["<=30"]], 
@@ -150,11 +194,11 @@ def looper(directory_path, data_list_full, output_file_name):
 #						[ ["IsFridayThe13th", 38, [["True",0], ["False",0]]], ["Sex", 7, ["M"]] ] ]
 
 # Running IsFridayThe13th_given_Sex
-data_list_full = [ [ ["IsFullMoon", 39, [["True",0], ["False",0]]], ["Sex", 7, ["F"]] ], 
-						[ ["IsFullMoon", 39, [["True",0], ["False",0]]], ["Sex", 7, ["M"]] ] ]
+data_list_full = [ [ ["MassShootingOccurred", 41, [["True",0], ["False",0]]], ["Sex", 7, ["F"]] ], 
+						[ ["MassShootingOccurred", 41, [["True",0], ["False",0]]], ["Sex", 7, ["M"]] ] ]
 
 
 directory_path = "../partitioned_files/"
-output_file_name = "../results/IsFullMoon_given_Sex.csv"
+output_file_name = "../results/MassShootingOccured_given_Sex.csv"
 
-looper(directory_path, data_list_full, output_file_name)
+generate_partitioned_set("../partitioned_files/", "../_derek_only/_age_recode_12/", 13, ["1","2","3","4","5","6","7","8","9","10","11"], "data_split_by")

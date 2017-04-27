@@ -1,0 +1,4 @@
+Probability MassShootingOccurred = True given Sex = F, 0.22826977979509872, 2648397
+Probability MassShootingOccurred = False given Sex = F, 0.2653639163614821, 2648397
+Probability MassShootingOccurred = True given Sex = M, 0.23502292141246198, 2648397
+Probability MassShootingOccurred = False given Sex = M, 0.27134111690958723, 2648397
