@@ -273,7 +273,7 @@ def break_large_file(input_file, output_dir):
 	return
 
 
-break_large_file("../data_raw/_DeathRecords_ver12.csv", "../partitioned_files/")
+break_large_file("../data_raw/_DeathRecords_ver14.csv", "../partitioned_files/")
 
 #arr = return_file_as_array("../data_raw/SunSpotData.csv", 1)
 #for line in arr:
@@ -281,7 +281,7 @@ break_large_file("../data_raw/_DeathRecords_ver12.csv", "../partitioned_files/")
 
 #add_data_binary("../data_raw/_DeathRecords_ver8.csv", "../data_raw/MassShootings.csv", 1, "MassShootingOccurred","../data_raw/_DeathRecords_ver9.csv")
 
-#add_daily_data("../data_raw/_DeathRecords_ver11.csv", "../data_raw/S_and_P_500.csv", 0, "1/1/2016", "Formatted Date", "../data_raw/_DeathRecords_ver12.csv")
+#add_daily_data("../data_raw/_DeathRecords_ver13.csv", "../data_raw/BasicDate.csv", 0, "1/1/2016", "Formatted Date", "../data_raw/_DeathRecords_ver14.csv")
 
 # Used to add in federal holiday data
 #add_data_binary("../data_raw/_DeathRecords_ver6.csv", "../data_raw/FullMoon.csv", 1, "IsFullMoon","../data_raw/_temp.csv")
@@ -290,5 +290,5 @@ break_large_file("../data_raw/_DeathRecords_ver12.csv", "../partitioned_files/")
 #estimate_dates_from_day_of_week_uniform("../data_raw/_DeathRecords_ver2.csv", 6, "../data_raw/temp.csv")
 
 # Used to remove redundant columns of data, can be used again if more found redundant
-#remove_list = ['S&P 500 Percent Change']
-#remove_column("../data_raw/_DeathRecords_ver9.csv", remove_list, "../data_raw/_DeathRecords_ver10.csv")
+#remove_list = ['Formatted Date']
+#remove_column("../data_raw/_DeathRecords_ver12.csv", remove_list, "../data_raw/_DeathRecords_ver13.csv")
