@@ -266,4 +266,4 @@ Index cheat sheet:
 42: S&P 500 Percent Change
 		Options: traditional percent notation
 
-44: Basic Date
+43: Basic Date
