@@ -116,7 +116,8 @@ def bayes_main(directory_path, data_list, output_file_name):
 		mult = 1
 		for item in record_dict:
 			if check_for in item:
-				mult *= (record_dict[item]/total_item[1])
+				if (total_item[1] != 0):
+					mult *= (record_dict[item]/total_item[1])
 		mult *= (total_item[1]/total)
 		line = line+"Probability "+data_list[0][0]+" = "+total_item[0]+" given " + X +", "+str(mult)+", "+str(total) +"\n"
 		add_line_to_file(line,output_file_name)
@@ -142,15 +143,10 @@ def looper(directory_path, data_list_full, output_file_name):
 
 
 
-
-
-
-
-data_list_full = [ [ ["IsFridayThe13th", 37, [["True",0], ["False",0]]], ["Sex", 7, ["F"]] ], 
-						[ ["IsFridayThe13th", 37, [["True",0], ["False",0]]], ["Sex", 7, ["M"]] ] ]
-
+data_list_full = [ [ ["MannerOfDeath", 19, [["1",0], ["2",0], ["3",0], ["4",0], ["5",0], ["6",0], ["7",0], ["0",0]]], ["IsFullMoon", 39, ["True"]] ], 
+					[ ["MannerOfDeath", 19, [["1",0], ["2",0], ["3",0], ["4",0], ["5",0], ["6",0], ["7",0], ["0",0]]], ["IsFullMoon", 39, ["False"]] ] ]
 
 directory_path = "../partitioned_files/"
-output_file_name = "../results/IsFridayThe13th_given_Sex.csv"
+output_file_name = "../results/MannerOfDeath_given_IsFullMoon.csv"
 
 looper(directory_path, data_list_full, output_file_name)

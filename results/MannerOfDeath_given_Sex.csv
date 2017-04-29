@@ -1,17 +1,4 @@
-Probability IsFridayThe13th = True given Sex = F, 0.013884625303532665, 2648397
-Probability IsFridayThe13th = False given Sex = F, 0.4797490708530481, 2648397
-Probability IsFridayThe13th = True given Sex = M, 0.014150068890728996, 2648397
-Probability IsFridayThe13th = False given Sex = M, 0.4922139694313201, 2648397
-Probability MannerOfDeath = 1 given Sex = F, 0.018394900764500184, 2648397
-Probability MannerOfDeath = 2 given Sex = F, 0.0037298033489692067, 2648397
-Probability MannerOfDeath = 3 given Sex = F, 0.0013438317593623614, 2648397
-Probability MannerOfDeath = 4 given Sex = F, 0.000541082020558096, 2648397
-Probability MannerOfDeath = 5 given Sex = F, 0.0016568512953307228, 2648397
-Probability MannerOfDeath = 1 given Sex = F, 0.018394900764500184, 2648397
-Probability MannerOfDeath = 2 given Sex = F, 0.0037298033489692067, 2648397
-Probability MannerOfDeath = 3 given Sex = F, 0.0013438317593623614, 2648397
-Probability MannerOfDeath = 4 given Sex = F, 0.000541082020558096, 2648397
-Probability MannerOfDeath = 5 given Sex = F, 0.0016568512953307228, 2648397
+
 Probability MannerOfDeath = 1 given Sex = F, 0.018394900764500184, 2648397
 Probability MannerOfDeath = 2 given Sex = F, 0.0037298033489692067, 2648397
 Probability MannerOfDeath = 3 given Sex = F, 0.0013438317593623614, 2648397
