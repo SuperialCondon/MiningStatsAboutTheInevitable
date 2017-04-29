@@ -115,12 +115,15 @@ def bayes_main(directory_path, data_list, output_file_name):
 		check_for = data_list[0][0] + this_item
 		mult = 1
 		for item in record_dict:
+			adder = 0
 			if check_for in item:
 				if (total_item[1] != 0):
+					adder += (record_dict[item]/total_item[1])
 					mult *= (record_dict[item]/total_item[1])
 		mult *= (total_item[1]/total)
 		line = line+"Probability "+data_list[0][0]+" = "+total_item[0]+" given " + X +", "+str(mult)+", "+str(total) +"\n"
-		add_line_to_file(line,output_file_name)
+		print(mult)
+		#add_line_to_file(line,output_file_name)
 
 
 # Data list in format -> [ [header_name, raw_index, [possibility_list] ], ...]
@@ -142,9 +145,11 @@ def looper(directory_path, data_list_full, output_file_name):
 
 
 
+data_list_full = [[ ["MannerOfDeath", 19, [["1",0], ["2",0], ["3",0], ["4",0], ["5",0], ["6",0], ["7",0], ["0",0]]], ["IsFullMoon", 39, ["True"]]],
+					[ ["MannerOfDeath", 19, [["1",0], ["2",0], ["3",0], ["4",0], ["5",0], ["6",0], ["7",0], ["0",0]]], ["IsFullMoon", 39, ["False"]]] ]
 
-data_list_full = [ [ ["MannerOfDeath", 19, [["1",0], ["2",0], ["3",0], ["4",0], ["5",0], ["6",0], ["7",0], ["0",0]]], ["IsFullMoon", 39, ["True"]] ], 
-					[ ["MannerOfDeath", 19, [["1",0], ["2",0], ["3",0], ["4",0], ["5",0], ["6",0], ["7",0], ["0",0]]], ["IsFullMoon", 39, ["False"]] ] ]
+#data_list_full = [ [ ["MannerOfDeath", 19, [["1",0], ["2",0], ["3",0], ["4",0], ["5",0], ["6",0], ["7",0], ["0",0]]], ["IsFullMoon", 39, ["True"]] ], 
+#					[ ["MannerOfDeath", 19, [["1",0], ["2",0], ["3",0], ["4",0], ["5",0], ["6",0], ["7",0], ["0",0]]], ["IsFullMoon", 39, ["False"]] ] ]
 
 directory_path = "../partitioned_files/"
 output_file_name = "../results/MannerOfDeath_given_IsFullMoon.csv"
