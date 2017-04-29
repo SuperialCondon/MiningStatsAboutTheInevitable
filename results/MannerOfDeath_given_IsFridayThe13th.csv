@@ -1,0 +1,16 @@
+Probability MannerOfDeath = 1 given IsFridayThe13th = True, 0.00012384850156528648, 2648397
+Probability MannerOfDeath = 2 given IsFridayThe13th = True, 3.92690370816762e-05, 2648397
+Probability MannerOfDeath = 3 given IsFridayThe13th = True, 1.4725888905628574e-05, 2648397
+Probability MannerOfDeath = 4 given IsFridayThe13th = True, 4.15345584517729e-06, 2648397
+Probability MannerOfDeath = 5 given IsFridayThe13th = True, 1.1705193745499637e-05, 2648397
+Probability MannerOfDeath = 6 given IsFridayThe13th = True, 0.0, 2648397
+Probability MannerOfDeath = 7 given IsFridayThe13th = True, 0.002037081298611953, 2648397
+Probability MannerOfDeath = 0 given IsFridayThe13th = True, 0.0003458695958347635, 2648397
+Probability MannerOfDeath = 1 given IsFridayThe13th = False, 0.05040709531086163, 2648397
+Probability MannerOfDeath = 2 given IsFridayThe13th = False, 0.016462788622702715, 2648397
+Probability MannerOfDeath = 3 given IsFridayThe13th = False, 0.006401608218103253, 2648397
+Probability MannerOfDeath = 4 given IsFridayThe13th = False, 0.0014053784232499885, 2648397
+Probability MannerOfDeath = 5 given IsFridayThe13th = False, 0.004183285209883564, 2648397
+Probability MannerOfDeath = 6 given IsFridayThe13th = False, 0.0, 2648397
+Probability MannerOfDeath = 7 given IsFridayThe13th = False, 0.7812884548653393, 2648397
+Probability MannerOfDeath = 0 given IsFridayThe13th = False, 0.13727247085689948, 2648397

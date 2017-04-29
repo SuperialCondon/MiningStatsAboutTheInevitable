@@ -122,36 +122,26 @@ def bayes_main(directory_path, data_list, output_file_name):
 					mult *= (record_dict[item]/total_item[1])
 		mult *= (total_item[1]/total)
 		line = line+"Probability "+data_list[0][0]+" = "+total_item[0]+" given " + X +", "+str(mult)+", "+str(total) +"\n"
-		print(mult)
-		#add_line_to_file(line,output_file_name)
+		add_line_to_file(line,output_file_name)
 
 
-# Data list in format -> [ [header_name, raw_index, [possibility_list] ], ...]
-#data_list = [ ["buys_computer", 5, [["yes",0], ["no",0]]], 
-#				["age", 1, ["<=30"]], 
-#				["income", 2, ["medium"]], 
-#				["student", 3, ["yes"]], 
-#				["credit_rating", 4, ["fair"]] ]
-
-#bayes_main("../from_slides/", data_list)
-
-# data_list_full must be formatted like a list of the data_list objects.
-#   [                  First objects                  ], [Secondary Objects]
-# [ ["IsFederalHoliday", 37, [["True",0], ["False",0]]], ["Sex", 7, ["F"]] ]
 
 def looper(directory_path, data_list_full, output_file_name):
 	for sub_list in data_list_full:
 		bayes_main(directory_path, sub_list, output_file_name)
 
 
-
-data_list_full = [[ ["MannerOfDeath", 19, [["1",0], ["2",0], ["3",0], ["4",0], ["5",0], ["6",0], ["7",0], ["0",0]]], ["IsFullMoon", 39, ["True"]]],
-					[ ["MannerOfDeath", 19, [["1",0], ["2",0], ["3",0], ["4",0], ["5",0], ["6",0], ["7",0], ["0",0]]], ["IsFullMoon", 39, ["False"]]] ]
-
-#data_list_full = [ [ ["MannerOfDeath", 19, [["1",0], ["2",0], ["3",0], ["4",0], ["5",0], ["6",0], ["7",0], ["0",0]]], ["IsFullMoon", 39, ["True"]] ], 
-#					[ ["MannerOfDeath", 19, [["1",0], ["2",0], ["3",0], ["4",0], ["5",0], ["6",0], ["7",0], ["0",0]]], ["IsFullMoon", 39, ["False"]] ] ]
+data_list_full = [[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["1"]]],
+					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["2"]]],
+					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["3"]]],
+					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["4"]]],
+					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["5"]]],
+					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["6"]]],
+					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["7"]]],
+					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["0"]]]
+					]
 
 directory_path = "../partitioned_files/"
-output_file_name = "../results/MannerOfDeath_given_IsFullMoon.csv"
+output_file_name = "../results/MannerOfDeath_given_ResidentStatus.csv"
 
 looper(directory_path, data_list_full, output_file_name)
