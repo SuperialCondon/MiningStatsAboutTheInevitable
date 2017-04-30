@@ -1,5 +1,5 @@
 #R Script to validate CDC's findings.
-#Derric Gorothy, Michael Condon, Bryce Melvin 
+#Derric Gorothy, Michael Condon, Bryce Melvin  
 
 data = read.csv(file = "DeathRecords_pt0.csv", header = TRUE)
 counter = 0
