@@ -1,0 +1,16 @@
+Probability MannerOfDeath = 1 given IsFullMoon = True, 0.0016526978394855456, 2648397
+Probability MannerOfDeath = 2 given IsFullMoon = True, 0.0005063440262166133, 2648397
+Probability MannerOfDeath = 3 given IsFullMoon = True, 0.00020691761846883228, 2648397
+Probability MannerOfDeath = 4 given IsFullMoon = True, 4.3044906031837375e-05, 2648397
+Probability MannerOfDeath = 5 given IsFullMoon = True, 0.0001329105870456733, 2648397
+Probability MannerOfDeath = 6 given IsFullMoon = True, 0.0, 2648397
+Probability MannerOfDeath = 7 given IsFullMoon = True, 0.02533230478663131, 2648397
+Probability MannerOfDeath = 0 given IsFullMoon = True, 0.0044793133355762, 2648397
+Probability MannerOfDeath = 1 given IsFullMoon = False, 0.04887824597294137, 2648397
+Probability MannerOfDeath = 2 given IsFullMoon = False, 0.015995713633567776, 2648397
+Probability MannerOfDeath = 3 given IsFullMoon = False, 0.006209416488540048, 2648397
+Probability MannerOfDeath = 4 given IsFullMoon = False, 0.0013664869730633286, 2648397
+Probability MannerOfDeath = 5 given IsFullMoon = False, 0.00406207981658339, 2648397
+Probability MannerOfDeath = 6 given IsFullMoon = False, 0.0, 2648397
+Probability MannerOfDeath = 7 given IsFullMoon = False, 0.75799323137732, 2648397
+Probability MannerOfDeath = 0 given IsFullMoon = False, 0.13313902711715805, 2648397

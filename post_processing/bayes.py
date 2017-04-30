@@ -18,18 +18,6 @@ def add_line_to_file(init_str,output_file_name):
 	return
 
 
-def array_to_file(row,output_file_name):
-
-	init_str = ""
-	for item in row:
-		init_str = init_str + item.strip('\t') + ","
-	init_str = init_str[:-1] + "\n"
-
-	with open(output_file_name, "a") as f:
-		f.write(init_str)
-	return
-
-
 # Redundant function, refactor to remove
 def get_c_index(directory_path, c,):
 	for filename in os.listdir(directory_path):
@@ -127,78 +115,33 @@ def bayes_main(directory_path, data_list, output_file_name):
 		check_for = data_list[0][0] + this_item
 		mult = 1
 		for item in record_dict:
+			adder = 0
 			if check_for in item:
-				mult *= (record_dict[item]/total_item[1])
+				if (total_item[1] != 0):
+					adder += (record_dict[item]/total_item[1])
+					mult *= (record_dict[item]/total_item[1])
 		mult *= (total_item[1]/total)
 		line = line+"Probability "+data_list[0][0]+" = "+total_item[0]+" given " + X +", "+str(mult)+", "+str(total) +"\n"
 		add_line_to_file(line,output_file_name)
 
 
-#
-# Usage: Split set based on some relevant attribute
-#
-
-def generate_partitioned_set(input_directory_path, output_directory_path, relevant_attr_index, relevant_attr_possibility_list, filename_base):
-	file_list = []
-	for i in range(0,len(relevant_attr_possibility_list)):
-		this_file = output_directory_path + "_"+filename_base+"_"+relevant_attr_possibility_list[i]+".csv"
-		file_list.append(this_file)
-	print(file_list)
-
-
-	for filename in os.listdir(input_directory_path):
-		print("Reading in file "+filename)
-		f = open(input_directory_path+filename)
-		csv_f = csv.reader(f)
-		first_line = True
-
-		for row in csv_f:
-			if(first_line):
-				for file in file_list:
-					#array_to_file(row,file)
-					a=0
-				first_line = False
-			else:
-				for i in range(0, len(relevant_attr_possibility_list)):
-					if(row[relevant_attr_index] == relevant_attr_possibility_list[i]):
-						array_to_file(row,file_list[i])
-				
-	return
-
-
-# Data list in format -> [ [header_name, raw_index, [possibility_list] ], ...]
-#data_list = [ ["buys_computer", 5, [["yes",0], ["no",0]]], 
-#				["age", 1, ["<=30"]], 
-#				["income", 2, ["medium"]], 
-#				["student", 3, ["yes"]], 
-#				["credit_rating", 4, ["fair"]] ]
-
-#bayes_main("../from_slides/", data_list)
-
-# data_list_full must be formatted like a list of the data_list objects.
-#   [                  First objects                  ], [Secondary Objects]
-# [ ["IsFederalHoliday", 37, [["True",0], ["False",0]]], ["Sex", 7, ["F"]] ]
 
 def looper(directory_path, data_list_full, output_file_name):
 	for sub_list in data_list_full:
 		bayes_main(directory_path, sub_list, output_file_name)
 
 
-
-
-
-
-
-# Running IsFridayThe13th_given_Sex
-#data_list_full = [ [ ["IsFridayThe13th", 38, [["True",0], ["False",0]]], ["Sex", 7, ["F"]] ], 
-#						[ ["IsFridayThe13th", 38, [["True",0], ["False",0]]], ["Sex", 7, ["M"]] ] ]
-
-# Running IsFridayThe13th_given_Sex
-data_list_full = [ [ ["MassShootingOccurred", 41, [["True",0], ["False",0]]], ["Sex", 7, ["F"]] ], 
-						[ ["MassShootingOccurred", 41, [["True",0], ["False",0]]], ["Sex", 7, ["M"]] ] ]
-
+data_list_full = [[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["1"]]],
+					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["2"]]],
+					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["3"]]],
+					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["4"]]],
+					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["5"]]],
+					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["6"]]],
+					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["7"]]],
+					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["0"]]]
+					]
 
 directory_path = "../partitioned_files/"
-output_file_name = "../results/MassShootingOccured_given_Sex.csv"
+output_file_name = "../results/MannerOfDeath_given_ResidentStatus.csv"
 
-generate_partitioned_set("../partitioned_files/", "../_derek_only/_age_recode_12/", 13, ["1","2","3","4","5","6","7","8","9","10","11"], "data_split_by")
+looper(directory_path, data_list_full, output_file_name)
