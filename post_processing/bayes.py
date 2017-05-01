@@ -18,31 +18,11 @@ def add_line_to_file(init_str,output_file_name):
 	return
 
 
-# Redundant function, refactor to remove
-def get_c_index(directory_path, c,):
-	for filename in os.listdir(directory_path):
-		f = open(directory_path+filename)
-		csv_f = csv.reader(f)
-
-		for row in csv_f:
-			for i in range(0, len(row)):
-				if (row[i].strip() == c):
-					return i
-
-
-def get_indice_list(directory_path, needed_rows):
-	indice_list = []
-	for filename in os.listdir(directory_path):
-		f = open(directory_path+filename)
-		csv_f = csv.reader(f)
-
-		for row in csv_f:
-			for i in range(0, len(row)):
-				if (row[i].strip() in needed_rows):
-					indice_list.append(i)
-			return indice_list
-
-
+# Assuming that each partial dataset has a header
+#
+# directory_path -> directory that holds partial dataset
+# data_list -> single Bayesian calculation
+#
 def read_in_files_in_directory(directory_path, data_list):
 	complete_list = []
 	indice_list = []
@@ -50,6 +30,7 @@ def read_in_files_in_directory(directory_path, data_list):
 	for item in data_list:
 		indice_list.append(item[1])
 
+	# Iterate through every file in directory
 	for filename in os.listdir(directory_path):
 		print("Reading in file "+filename)
 		f = open(directory_path+filename)
@@ -64,6 +45,7 @@ def read_in_files_in_directory(directory_path, data_list):
 				first_line = False
 				
 			else:
+				# Store only needed elements, not every element
 				for i in range(0, len(indice_list)):
 					this_line.append(row[indice_list[i]].strip())
 				file_list.append(this_line)
@@ -73,16 +55,19 @@ def read_in_files_in_directory(directory_path, data_list):
 	return (complete_list)
 
 
-# C is the single value that we care about, X will be rest of list
+# directory_path -> directory that holds partial dataset
+# data_list -> single Bayesian calculation
+# output_file_name -> Bayesian output file with file path 
+#
 def bayes_main(directory_path, data_list, output_file_name):
 	C_index = 0
 	complete_list = read_in_files_in_directory(directory_path, data_list)
 	total = 0
 	C_possibility_list = data_list[0][2]
+	# Due to the size of the set, dictionary is efficient enough to store each possibility
 	record_dict = {}
 	X = ""
 
-	# Establish dictionary to record 
 	# loop through entire data list
 	for i in range(1, len(data_list)):
 		# loop through the outcome list
@@ -97,6 +82,7 @@ def bayes_main(directory_path, data_list, output_file_name):
 
 	X = X[:-2]
 
+	# For every stored element, place into dictionary
 	for item in complete_list:
 		for possibility in C_possibility_list:
 			if (item[C_index] == possibility[0]):
@@ -109,6 +95,7 @@ def bayes_main(directory_path, data_list, output_file_name):
 
 		total += 1
 
+	# Now, loop through the stored dictionary and perform Bayesian calculation
 	for total_item in C_possibility_list:
 		line = ""
 		this_item = total_item[0]
@@ -125,23 +112,25 @@ def bayes_main(directory_path, data_list, output_file_name):
 		add_line_to_file(line,output_file_name)
 
 
-
+# Simple looping function if multiple Bayesian calculations need to be run
+#
 def looper(directory_path, data_list_full, output_file_name):
 	for sub_list in data_list_full:
 		bayes_main(directory_path, sub_list, output_file_name)
 
 
-data_list_full = [[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["1"]]],
-					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["2"]]],
-					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["3"]]],
-					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["4"]]],
-					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["5"]]],
-					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["6"]]],
-					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["7"]]],
-					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["0"]]]
-					]
+# EXAMPLE USAGE:
+#
+#data_list_full = [[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["1"]]],
+#					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["2"]]],
+#					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["3"]]],
+#					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["4"]]],
+#					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["5"]]],
+#					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["6"]]],
+#					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["7"]]],
+#					[ ["ResidentStatus", 2, [["1",0], ["2",0], ["3",0], ["4",0]]], ["MannerOfDeath", 19, ["0"]]]
+#					]
 
-directory_path = "../partitioned_files/"
-output_file_name = "../results/MannerOfDeath_given_ResidentStatus.csv"
-
-looper(directory_path, data_list_full, output_file_name)
+#directory_path = "../partitioned_files/"
+#output_file_name = "../results/MannerOfDeath_given_ResidentStatus.csv"
+#looper(directory_path, data_list_full, output_file_name)
