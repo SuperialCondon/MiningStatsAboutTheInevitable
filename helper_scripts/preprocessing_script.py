@@ -50,8 +50,6 @@ def get_month_and_day_indeces(input_file):
 		return return_array
 
 
-# Format: [[data],[data],...]
-#
 def return_file_as_array(input_file, column_header_in_file):
 
 	first_line = column_header_in_file
@@ -70,8 +68,6 @@ def return_file_as_array(input_file, column_header_in_file):
 	return return_array
 
 
-# Format: [[data],[data],...]
-#
 def return_file_as_dict(input_file, column_header_in_file):
 
 	first_line = column_header_in_file
@@ -94,6 +90,7 @@ def return_file_as_dict(input_file, column_header_in_file):
 # Specific to 2014, can be made more extensible if needed
 #
 # Takes day_of_week: Int (Monday = 1, Tuesday = 2, ...)
+# Used to estimate the full date of death
 #
 def get_list_of_possible_days(day_of_week, month):
 	
@@ -119,6 +116,9 @@ def get_list_of_possible_days(day_of_week, month):
 	return possible_days
 
 
+# Used to simply remove a column, works with files too large to process with Excel
+# and other conventional tools
+#
 def remove_column(file_name, column_list, new_file_name):
 
 	if(os.path.isfile(new_file_name)):
@@ -147,6 +147,8 @@ def remove_column(file_name, column_list, new_file_name):
 	return
 
 
+# Landed on a uniform distribution to estimate the full date
+#
 def estimate_dates_from_day_of_week_uniform(input_file, row_to_insert, output_file):
 
 	counter = 0
@@ -167,6 +169,8 @@ def estimate_dates_from_day_of_week_uniform(input_file, row_to_insert, output_fi
 			
 		else:
 			possible_days = get_list_of_possible_days(int(row[16]),int(row[5]))
+			# Random selection was the best way to estimate
+			# Used random library
 			estimated_day = random.choice(possible_days)
 			row.insert(row_to_insert,str(estimated_day))
 
@@ -174,6 +178,7 @@ def estimate_dates_from_day_of_week_uniform(input_file, row_to_insert, output_fi
 		counter += 1
 
 	return
+
 
 # Takes a file that can have a header, user must specify a 
 # If a day is listed, a 1 will be added, otherwise a 0 will be added
@@ -209,6 +214,7 @@ def add_data_binary(input_file, supplementary_file, column_header_in_supplementa
 
 
 # Supplementary file must be formatted like: month, day, data
+# Assumes that these is an entry for every date, otherwise insert not_found_str
 #
 def add_daily_data(input_file, supplementary_file, column_header_in_supplementary, not_found_str, new_heading, output_file):
 
@@ -244,6 +250,7 @@ def add_daily_data(input_file, supplementary_file, column_header_in_supplementar
 
 
 # Takes output_dir --> ../some_dir/
+# Control file size with the global at the top of the file
 #
 def break_large_file(input_file, output_dir):
 
@@ -273,6 +280,8 @@ def break_large_file(input_file, output_dir):
 	return
 
 
+# EXAMPLE USAGE:
+#
 #break_large_file("../data_raw/_DeathRecords_ver14.csv", "../partitioned_files/")
 
 #arr = return_file_as_array("../data_raw/SunSpotData.csv", 1)
@@ -290,5 +299,5 @@ def break_large_file(input_file, output_dir):
 #estimate_dates_from_day_of_week_uniform("../data_raw/_DeathRecords_ver2.csv", 6, "../data_raw/temp.csv")
 
 # Used to remove redundant columns of data, can be used again if more found redundant
-remove_list = ['DayOfDeath','Formatted Date']
-remove_column("../data_raw/_DeathRecords_ver14.csv", remove_list, "../data_raw/_DeathRecords_ver15.csv")
+#remove_list = ['DayOfDeath','Formatted Date']
+#remove_column("../data_raw/_DeathRecords_ver14.csv", remove_list, "../data_raw/_DeathRecords_ver15.csv")
