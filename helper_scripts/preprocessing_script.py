@@ -273,7 +273,7 @@ def break_large_file(input_file, output_dir):
 	return
 
 
-break_large_file("../data_raw/_DeathRecords_ver14.csv", "../partitioned_files/")
+#break_large_file("../data_raw/_DeathRecords_ver14.csv", "../partitioned_files/")
 
 #arr = return_file_as_array("../data_raw/SunSpotData.csv", 1)
 #for line in arr:
@@ -290,5 +290,5 @@ break_large_file("../data_raw/_DeathRecords_ver14.csv", "../partitioned_files/")
 #estimate_dates_from_day_of_week_uniform("../data_raw/_DeathRecords_ver2.csv", 6, "../data_raw/temp.csv")
 
 # Used to remove redundant columns of data, can be used again if more found redundant
-#remove_list = ['Formatted Date']
-#remove_column("../data_raw/_DeathRecords_ver12.csv", remove_list, "../data_raw/_DeathRecords_ver13.csv")
+remove_list = ['DayOfDeath','Formatted Date']
+remove_column("../data_raw/_DeathRecords_ver14.csv", remove_list, "../data_raw/_DeathRecords_ver15.csv")
