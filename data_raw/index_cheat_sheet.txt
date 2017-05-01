@@ -90,7 +90,7 @@ Index cheat sheet:
 			4,"15 - 24 years"
 			5,"25 - 34 years"
 			6,"35 - 44 years"
-			7,"45 - 54 years"
+			7,"45 - 54 years" 
 			8,"55 - 64 years"
 			9,"65 - 74 years"
 			10,"75 - 84 years"
